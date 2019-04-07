@@ -1,7 +1,7 @@
 package com.example.foodfactory;
 
 public class FoodProduct {
-    private int availability;
+    private boolean availability;
     private long id;
     private String productName, description;
     private double weight, price;
@@ -14,12 +14,12 @@ public class FoodProduct {
         this.id = id;
     }
 
-    public int getAvailability() {
+    public boolean getAvailability() {
         return availability;
     }
 
     public void setAvailability(int availability) {
-        this.availability = availability;
+        this.availability = (availability == 1);
     }
 
     public String getProductName() {

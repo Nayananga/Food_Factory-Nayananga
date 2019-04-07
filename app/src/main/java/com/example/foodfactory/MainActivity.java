@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    public DatabaseHandler databaseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        databaseHandler = new DatabaseHandler(this);
     }
+
+
 
     public void registerProduct(View view) {
         Intent intent = new Intent(this, RegisterProduct.class);
