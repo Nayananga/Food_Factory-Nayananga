@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpdateProduct"></activity>
+        <activity android:name=".FindRecipies"></activity>
+        <activity android:name=".UpdateProduct" />
         <activity android:name=".Recipes" />
         <activity android:name=".Search" />
         <activity android:name=".EditProduct" />

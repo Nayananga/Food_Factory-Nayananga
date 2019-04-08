@@ -103,7 +103,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor = db.query(true,TableEntry.TABLE_NAME, projection, TableEntry.COLUMN_NAME_AVAILABILITY + " = ? ", new String[]{"1"}, null, null, null, null);
                 break;
             case "search":
-                cursor = db.query(true,TableEntry.TABLE_NAME, projection, TableEntry.COLUMN_NAME_PRODUCT_NAME + " LIKE ? OR " + TableEntry.COLUMN_NAME_DESCRIPTION + "LIKE ? ", new String[]{"%" + searchKeyWord + "%"}, null, null, null, null);
+                cursor = db.query(true,TableEntry.TABLE_NAME, projection, TableEntry.COLUMN_NAME_PRODUCT_NAME + " LIKE ? OR " + TableEntry.COLUMN_NAME_DESCRIPTION + " LIKE ? ", new String[]{"%" + searchKeyWord + "%"}, null, null, null, null);
 
                 break;
             default:
