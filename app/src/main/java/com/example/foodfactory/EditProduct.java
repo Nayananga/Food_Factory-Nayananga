@@ -38,6 +38,7 @@ public class EditProduct extends AppCompatActivity {
                 extras.putDouble("PRODUCTWEIGHT", dataModel.getWeight());
                 extras.putDouble("PRODUCTPRICE", dataModel.getPrice());
                 extras.putString("PRODUCTDESCRIPTION", dataModel.getDescription());
+                extras.putBoolean("PRODUCTAVAILABILITY", dataModel.getAvailability());
                 Intent editProduct = new Intent(EditProduct.this,UpdateProduct.class);
                 editProduct.putExtras(extras);
                 startActivity(editProduct);

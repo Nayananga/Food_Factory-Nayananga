@@ -42,10 +42,12 @@ public class UpdateProduct extends AppCompatActivity {
         Double PRODUCTWEIGHT = extras.getDouble("PRODUCTWEIGHT");
         Double PRODUCTPRICE = extras.getDouble("PRODUCTPRICE");
         String PRODUCTDESCRIPTION = extras.getString("PRODUCTDESCRIPTION");
+        Boolean PRODUCTAVAILABILITY = extras.getBoolean("PRODUCTAVAILABILITY");
         productName.setText(PRODUCTNAME);
         productWeight.setText(String.valueOf(PRODUCTWEIGHT));
         productPrice.setText(String.valueOf(PRODUCTPRICE));
         productDescription.setText(PRODUCTDESCRIPTION);
+        productAvailability.setChecked(PRODUCTAVAILABILITY);
         updatedProduct.setId(PRODUCTID);
         return updatedProduct;
     }
