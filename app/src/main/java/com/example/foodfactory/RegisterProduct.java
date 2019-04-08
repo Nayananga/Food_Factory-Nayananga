@@ -55,6 +55,10 @@ public class RegisterProduct extends AppCompatActivity {
             if(reply){
                 Toast toast = Toast.makeText(getApplicationContext(), "New Product Saved", Toast.LENGTH_SHORT);
                 toast.show();
+                editTextProductName.getText().clear();
+                editTextWeight.getText().clear();
+                editTextPrice.getText().clear();
+                editTextDescription.getText().clear();
             }
             else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Error occurred while saving", Toast.LENGTH_SHORT);
