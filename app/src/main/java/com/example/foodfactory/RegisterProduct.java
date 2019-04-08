@@ -28,23 +28,39 @@ public class RegisterProduct extends AppCompatActivity {
     }
 
     public void saveRegisterProduct(View view) {
-        String productName = editTextProductName.getText().toString();
-        double weight = Double.valueOf(editTextWeight.getText().toString());
-        double price = Double.valueOf(editTextPrice.getText().toString());
-        String description = editTextDescription.getText().toString();
-        boolean reply;
-        foodProduct.setProductName(productName);
-        foodProduct.setWeight(weight);
-        foodProduct.setPrice(price);
-        foodProduct.setDescription(description);
-        reply = databaseHandler.insertNewProduct(foodProduct);
-        if(reply){
-            Toast toast = Toast.makeText(getApplicationContext(), "New Product Saved", Toast.LENGTH_SHORT);
+        if(editTextProductName.getText().toString().equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(), "Please fill Product name", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(editTextWeight.getText().toString().equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(), "Please fill Product Weight", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if(editTextPrice.getText().toString().equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(), "Please fill Product price", Toast.LENGTH_SHORT);
             toast.show();
         }
         else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Error occurred while saving", Toast.LENGTH_SHORT);
-            toast.show();
+            String productName = editTextProductName.getText().toString();
+            foodProduct.setProductName(productName);
+            double weight = Double.valueOf(editTextWeight.getText().toString());
+            foodProduct.setWeight(weight);
+            double price = Double.valueOf(editTextPrice.getText().toString());
+            foodProduct.setPrice(price);
+            String description = editTextDescription.getText().toString();
+            foodProduct.setDescription(description);
+
+            boolean reply;
+            reply = databaseHandler.insertNewProduct(foodProduct);
+            if(reply){
+                Toast toast = Toast.makeText(getApplicationContext(), "New Product Saved", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Error occurred while saving", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
+
     }
 }

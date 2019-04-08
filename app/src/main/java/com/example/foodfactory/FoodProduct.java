@@ -18,8 +18,8 @@ public class FoodProduct {
         return availability;
     }
 
-    public void setAvailability(int availability) {
-        this.availability = (availability == 1);
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     public String getProductName() {

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -120,9 +121,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     cursor.getColumnIndexOrThrow(TableEntry.COLUMN_NAME_PRICE));
             String description = cursor.getString(
                     cursor.getColumnIndexOrThrow(TableEntry.COLUMN_NAME_DESCRIPTION));
-            int availability = cursor.getInt(
-                    cursor.getColumnIndexOrThrow(TableEntry.COLUMN_NAME_AVAILABILITY));
-
+            boolean availability = false;
+                if(cursor.getInt(
+                        cursor.getColumnIndexOrThrow(TableEntry.COLUMN_NAME_AVAILABILITY)) == 1){
+                    availability = true;
+                }
+                else if(cursor.getInt(
+                    cursor.getColumnIndexOrThrow(TableEntry.COLUMN_NAME_AVAILABILITY)) == 0){
+                    availability = false;
+                 }
 
             FoodProduct foodProduct  = new FoodProduct();
             foodProduct.setId(id);
@@ -152,13 +159,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return updateCount != 0;
     }
 
-    public boolean updateProductAvailability (int id, int availability) {
+    public int updateProductAvailability (ArrayList<FoodProduct> foodProductUpdated) {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put(TableEntry.COLUMN_NAME_AVAILABILITY, availability);
+        Iterator<FoodProduct> itr = foodProductUpdated.iterator();
+        int totalUpdateCount = 0;
+        while (itr.hasNext()){
 
-        int updateCount = db.update(TableEntry.TABLE_NAME, values, TableEntry.COLUMN_NAME_ROW_ID + " = ? ", new String[]{String.valueOf(id)});
-        return updateCount != 0;
+            FoodProduct currentUpdatedFoodProduct = itr.next();
+
+            if(currentUpdatedFoodProduct.getAvailability()){
+                values.put(TableEntry.COLUMN_NAME_ROW_ID, currentUpdatedFoodProduct.getId());
+                values.put(TableEntry.COLUMN_NAME_AVAILABILITY, currentUpdatedFoodProduct.getAvailability());
+                int updateCount = db.update(TableEntry.TABLE_NAME, values, TableEntry.COLUMN_NAME_ROW_ID + " = ? ", new String[]{String.valueOf(currentUpdatedFoodProduct.getId())});
+                totalUpdateCount += updateCount;
+            }
+
+
+        }
+
+        return totalUpdateCount;
     }
 
     public boolean deleteProduct(int id){
