@@ -25,6 +25,7 @@ public class Recipes extends AppCompatActivity {
     }
 
     public void findRecipes(View view) {
+
     }
 
     private void ShowRecords() {

@@ -9,16 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindRecipies"></activity>
-        <activity android:name=".UpdateProduct" />
-        <activity android:name=".Recipes" />
-        <activity android:name=".Search" />
-        <activity android:name=".EditProduct" />
-        <activity android:name=".Availability" />
-        <activity android:name=".DisplayProduct" />
-        <activity android:name=".RegisterProduct" />
+        <activity
+            android:name=".FindRecipies"
+            android:label="Find Recipes"/>
+        <activity
+            android:name=".UpdateProduct"
+            android:label="Update Product"/>
+        <activity
+            android:name=".Recipes"
+            android:label="Recipes"/>
+        <activity
+            android:name=".Search"
+            android:label="Search"/>
+        <activity
+            android:name=".EditProduct"
+            android:label="Edit Product"/>
+        <activity
+            android:name=".Availability"
+            android:label="Availability"/>
+        <activity
+            android:name=".DisplayProduct"
+            android:label="Display Product"/>
+        <activity
+            android:name=".RegisterProduct"
+            android:label="Register Product"/>
         <activity android:name=".MainActivity">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,4 +43,6 @@
         </activity>
     </application>
 
+
 </manifest>
+
