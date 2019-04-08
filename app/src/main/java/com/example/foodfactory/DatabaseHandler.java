@@ -146,16 +146,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public boolean updateProduct (int id, String product_name, double weight, double price, String description, int availability) {
+    public boolean updateProduct (FoodProduct updatedFoodProduct) {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put(TableEntry.COLUMN_NAME_PRODUCT_NAME, product_name);
-        values.put(TableEntry.COLUMN_NAME_WEIGHT, weight);
-        values.put(TableEntry.COLUMN_NAME_PRICE, price);
-        values.put(TableEntry.COLUMN_NAME_DESCRIPTION, description);
-        values.put(TableEntry.COLUMN_NAME_AVAILABILITY, availability);
+        values.put(TableEntry.COLUMN_NAME_PRODUCT_NAME, updatedFoodProduct.getProductName());
+        values.put(TableEntry.COLUMN_NAME_WEIGHT, updatedFoodProduct.getWeight());
+        values.put(TableEntry.COLUMN_NAME_PRICE, updatedFoodProduct.getPrice());
+        values.put(TableEntry.COLUMN_NAME_DESCRIPTION, updatedFoodProduct.getDescription());
+        values.put(TableEntry.COLUMN_NAME_AVAILABILITY, updatedFoodProduct.getAvailability());
 
-        int updateCount = db.update(TableEntry.TABLE_NAME, values,  TableEntry.COLUMN_NAME_ROW_ID + " = ? ", new String[]{String.valueOf(id)});
+        int updateCount = db.update(TableEntry.TABLE_NAME, values,  TableEntry.COLUMN_NAME_ROW_ID + " = ? ", new String[]{String.valueOf(updatedFoodProduct.getId())});
         return updateCount != 0;
     }
 
