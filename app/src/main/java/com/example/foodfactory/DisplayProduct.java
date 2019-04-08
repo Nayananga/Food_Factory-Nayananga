@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class DisplayProduct extends AppCompatActivity {
     public ArrayList<FoodProduct> foodProductUpdated;
     public DatabaseHandler databaseHandler;
-    private dataAdapterDispalyProduct dataAdapterDispalyProduct;
     private ListView listView;
 
     @Override
@@ -21,21 +20,18 @@ public class DisplayProduct extends AppCompatActivity {
         setContentView(R.layout.activity_display_product);
         databaseHandler = new DatabaseHandler(this);
         listView = findViewById(R.id.listViewDisplayProduct);
-        final ArrayList<FoodProduct> foodProducts = new ArrayList<>(databaseHandler.listAll("dispalyProduct"));
-        dataAdapterDispalyProduct = new dataAdapterDispalyProduct(this, foodProducts);
-        listView.setAdapter(dataAdapterDispalyProduct);
         ShowRecords();
     }
 
     public void addToKitchen(View view) {
-        int totalUpdateCount = databaseHandler.updateProductAvailability(foodProductUpdated);
+        int totalUpdateCount = databaseHandler.updateProductAvailability(foodProductUpdated, "displayProducts");
         Toast toast = Toast.makeText(getApplicationContext(), "Updated "+totalUpdateCount+ " Products", Toast.LENGTH_SHORT);
         toast.show();
     }
 
     private void ShowRecords() {
         final ArrayList<FoodProduct> foodProducts = new ArrayList<>(databaseHandler.listAll("dispalyProduct"));
-        dataAdapterDispalyProduct = new dataAdapterDispalyProduct(this, foodProducts);
+        com.example.foodfactory.dataAdapterDispalyProduct dataAdapterDispalyProduct = new dataAdapterDispalyProduct(this, foodProducts);
         listView.setAdapter(dataAdapterDispalyProduct);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

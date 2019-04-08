@@ -159,7 +159,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return updateCount != 0;
     }
 
-    public int updateProductAvailability (ArrayList<FoodProduct> foodProductUpdated) {
+    public int updateProductAvailability (ArrayList<FoodProduct> foodProductUpdated, String view) {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         Iterator<FoodProduct> itr = foodProductUpdated.iterator();
@@ -168,7 +168,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             FoodProduct currentUpdatedFoodProduct = itr.next();
 
-            if(currentUpdatedFoodProduct.getAvailability()){
+            if(currentUpdatedFoodProduct.getAvailability() && view.equals("displayProducts")){
+                values.put(TableEntry.COLUMN_NAME_ROW_ID, currentUpdatedFoodProduct.getId());
+                values.put(TableEntry.COLUMN_NAME_AVAILABILITY, currentUpdatedFoodProduct.getAvailability());
+                int updateCount = db.update(TableEntry.TABLE_NAME, values, TableEntry.COLUMN_NAME_ROW_ID + " = ? ", new String[]{String.valueOf(currentUpdatedFoodProduct.getId())});
+                totalUpdateCount += updateCount;
+            }
+            else if (!currentUpdatedFoodProduct.getAvailability() && view.equals("availability")){
                 values.put(TableEntry.COLUMN_NAME_ROW_ID, currentUpdatedFoodProduct.getId());
                 values.put(TableEntry.COLUMN_NAME_AVAILABILITY, currentUpdatedFoodProduct.getAvailability());
                 int updateCount = db.update(TableEntry.TABLE_NAME, values, TableEntry.COLUMN_NAME_ROW_ID + " = ? ", new String[]{String.valueOf(currentUpdatedFoodProduct.getId())});
