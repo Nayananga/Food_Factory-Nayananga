@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/hello"
     tools:context=".MainActivity">
 
     <android.support.v7.widget.GridLayout
@@ -22,8 +23,9 @@
 
         <Button
             android:id="@+id/buttonRegisterProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shape6"
             android:onClick="registerProduct"
             android:text="Register Product"
             app:layout_column="0"
@@ -33,8 +35,9 @@
 
         <Button
             android:id="@+id/buttonDisplayProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shape2"
             android:onClick="displayProduct"
             android:text="Display Product"
             app:layout_column="1"
@@ -44,8 +47,9 @@
 
         <Button
             android:id="@+id/buttonAvailability"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shape3"
             android:onClick="availability"
             android:text="Availability"
             app:layout_column="0"
@@ -55,8 +59,9 @@
 
         <Button
             android:id="@+id/buttonEditProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shape1"
             android:onClick="editProduct"
             android:text="Edit Product"
             app:layout_column="1"
@@ -66,8 +71,9 @@
 
         <Button
             android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shape5"
             android:onClick="search"
             android:text="Search"
             app:layout_column="0"
@@ -77,8 +83,9 @@
 
         <Button
             android:id="@+id/buttonRecipes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shape4"
             android:onClick="recipes"
             android:text="Recipes"
             app:layout_column="1"
