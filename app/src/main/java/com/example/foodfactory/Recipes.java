@@ -30,8 +30,9 @@ public class Recipes extends AppCompatActivity {
 //        foodProductUpdated.trimToSize();
         StringBuilder searchText = new StringBuilder();
         Bundle extras = new Bundle();
-        for (FoodProduct aFoodProductUpdated : foodProductUpdated) {
-            searchText.append(aFoodProductUpdated.getProductName()).append(",");
+        Iterator<FoodProduct> itr = foodProductUpdated.iterator();
+        while (itr.hasNext() && itr.next().getAvailability()){
+            searchText.append(itr.next().getProductName()).append(",");
         }
         extras.putString("SEARCHTEXT", String.valueOf(searchText));
         Intent findRecipes = new Intent(Recipes.this,FindRecipies.class);
@@ -43,6 +44,7 @@ public class Recipes extends AppCompatActivity {
     private void ShowRecords() {
         final ArrayList<FoodProduct> foodProducts = new ArrayList<>(databaseHandler.listAll("availability"));
         com.example.foodfactory.dataAdapterDispalyProduct dataAdapterDispalyProduct = new dataAdapterDispalyProduct(this, foodProducts);
+        foodProductUpdated = foodProducts;
         listView.setAdapter(dataAdapterDispalyProduct);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -50,15 +52,14 @@ public class Recipes extends AppCompatActivity {
                 CheckBox checkBox = (CheckBox)view.getTag(R.id.checkBox);
                 if(!checkBox.isChecked()){
                     checkBox.setChecked(true);
-//                    foodProductUpdated.add(position,foodProducts.get(position));
                     Toast toast = Toast.makeText(getApplicationContext(), "Selected "+ foodProducts.get(position).getProductName(), Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 else {
                     checkBox.setChecked(false);
-                    foodProducts.remove(position);
                     Toast toast = Toast.makeText(getApplicationContext(), "Removed "+ foodProducts.get(position).getProductName(), Toast.LENGTH_SHORT);
                     toast.show();
+
                 }
 
             }
