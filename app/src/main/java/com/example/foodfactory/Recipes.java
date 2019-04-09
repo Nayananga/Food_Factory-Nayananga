@@ -1,5 +1,6 @@
 package com.example.foodfactory;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Recipes extends AppCompatActivity {
     public ArrayList<FoodProduct> foodProductUpdated;
@@ -25,11 +27,21 @@ public class Recipes extends AppCompatActivity {
     }
 
     public void findRecipes(View view) {
+//        foodProductUpdated.trimToSize();
+        StringBuilder searchText = new StringBuilder();
+        Bundle extras = new Bundle();
+        for (FoodProduct aFoodProductUpdated : foodProductUpdated) {
+            searchText.append(aFoodProductUpdated.getProductName()).append(",");
+        }
+        extras.putString("SEARCHTEXT", String.valueOf(searchText));
+        Intent findRecipes = new Intent(Recipes.this,FindRecipies.class);
+        findRecipes.putExtras(extras);
+        startActivity(findRecipes);
 
     }
 
     private void ShowRecords() {
-        final ArrayList<FoodProduct> foodProducts = new ArrayList<>(databaseHandler.listAll("dispalyProduct"));
+        final ArrayList<FoodProduct> foodProducts = new ArrayList<>(databaseHandler.listAll("availability"));
         com.example.foodfactory.dataAdapterDispalyProduct dataAdapterDispalyProduct = new dataAdapterDispalyProduct(this, foodProducts);
         listView.setAdapter(dataAdapterDispalyProduct);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -38,15 +50,16 @@ public class Recipes extends AppCompatActivity {
                 CheckBox checkBox = (CheckBox)view.getTag(R.id.checkBox);
                 if(!checkBox.isChecked()){
                     checkBox.setChecked(true);
+//                    foodProductUpdated.add(position,foodProducts.get(position));
                     Toast toast = Toast.makeText(getApplicationContext(), "Selected "+ foodProducts.get(position).getProductName(), Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 else {
                     checkBox.setChecked(false);
+                    foodProducts.remove(position);
                     Toast toast = Toast.makeText(getApplicationContext(), "Removed "+ foodProducts.get(position).getProductName(), Toast.LENGTH_SHORT);
                     toast.show();
                 }
-
 
             }
         });
