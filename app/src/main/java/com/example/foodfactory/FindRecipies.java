@@ -2,6 +2,7 @@ package com.example.foodfactory;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,6 +20,7 @@ public class FindRecipies extends AppCompatActivity {
     private String PRODUCTNAME;
     private ListView listView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +29,16 @@ public class FindRecipies extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         PRODUCTNAME = extras.getString("SEARCHTEXT");
-
+        enableStrictMode();
         food2Fork = new Food2Fork();
         ShowRecords();
+    }
+
+    public void enableStrictMode()
+    {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
     }
 
     private void ShowRecords(){
