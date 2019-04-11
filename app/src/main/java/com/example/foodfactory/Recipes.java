@@ -31,8 +31,11 @@ public class Recipes extends AppCompatActivity {
         StringBuilder searchText = new StringBuilder();
         Bundle extras = new Bundle();
         Iterator<FoodProduct> itr = foodProductUpdated.iterator();
-        while (itr.hasNext() && itr.next().getAvailability()){
-            searchText.append(itr.next().getProductName()).append(",");
+        while (itr.hasNext()){
+            FoodProduct temp = itr.next();
+            if(temp.getAvailability()){
+                searchText.append(temp.getProductName()).append(",");
+            }
         }
         extras.putString("SEARCHTEXT", String.valueOf(searchText));
         Intent findRecipes = new Intent(Recipes.this,FindRecipies.class);
