@@ -27,14 +27,14 @@ public class Food2Fork {
     }
 
     public static JSONObject search(String query) throws IOException, JSONException {
-        final String url = API_URL_BASE + "/search?key=" + API_KEY + "&q=" + URLEncoder.encode(query, "UTF-8");
+        final String url = API_URL_BASE + "/search?key=" + API_KEY + "&q=" + URLEncoder.encode(query, "UTF-8") + "&page=1";
         return run(url);
     }
 
     /**
      * Extracts recipe IDs from search results.
      */
-    public static List<String> getRecipeTitles (JSONObject result) throws IOException, JSONException {
+    public static List<String> getRecipeTitles (JSONObject result) throws JSONException {
         final ArrayList<String> recipeTitles = new ArrayList<>();
         final JSONArray recipes = result.getJSONArray("recipes");
         for (int i = 0; i < recipes.length(); ++i) {
